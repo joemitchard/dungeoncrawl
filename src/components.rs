@@ -14,7 +14,16 @@ pub struct Player;
 pub struct Enemy;
 
 #[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Item;
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct AmuletOfYala;
+
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct MovingRandomly;
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct ChasingPlayer;
 
 // state
 #[derive(Clone, Copy, Debug, PartialEq)]
