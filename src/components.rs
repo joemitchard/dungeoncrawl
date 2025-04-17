@@ -1,5 +1,7 @@
 pub use crate::prelude::*;
 
+use std::collections::HashSet;
+
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Render {
     pub colour : ColorPair,
@@ -46,4 +48,30 @@ pub struct WantsToMove {
 pub struct WantsToAttack {
     pub attacker: Entity,
     pub target: Entity
+}
+
+// state
+#[derive(Clone, Debug, PartialEq)]
+pub struct FieldOfView {
+    pub visible_tiles: HashSet<Point>,
+    pub radius: i32,
+    pub is_dirty: bool
+}
+
+impl FieldOfView {
+    pub fn new(radius: i32) -> Self {
+        Self {
+            visible_tiles: HashSet::new(),
+            radius,
+            is_dirty: true
+        }
+    }
+
+    pub fn clone_dirty(&self) -> Self {
+        Self { 
+            visible_tiles: HashSet::new(), 
+            radius: self.radius, 
+            is_dirty: true
+        }
+    }
 }
