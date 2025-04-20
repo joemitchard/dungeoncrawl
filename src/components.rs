@@ -27,6 +27,15 @@ pub struct MovingRandomly;
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct ChasingPlayer;
 
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct ProvidesHealing {
+    pub amount: i32
+}
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct ProvidesDungeonMap;
+
 // state
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Health {
