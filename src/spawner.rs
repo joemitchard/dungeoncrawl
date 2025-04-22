@@ -84,7 +84,7 @@ pub fn spawn_magic_mapper(ecs: &mut World, pos: Point) {
                 colour: ColorPair::new(WHITE, BLACK),
                 glyph: to_cp437('{')
             },
-            Name("Healing Postion".to_string()),
+            Name("Map".to_string()),
             ProvidesDungeonMap{}
         )
     );
