@@ -34,10 +34,10 @@ pub struct MapBuilder {
 
 impl MapBuilder {
     pub fn new(rng: &mut RandomNumberGenerator) -> Self {
-        let mut architect : Box<dyn MapArchitect> = match rng.range(0, 3) {
-            0 => Box::new(DrunkardsWalkArchitect{}),
-            1 => Box::new(RoomArchitect{}),
-            _ => Box::new(CellularAutomataArchitect{})
+        let mut architect: Box<dyn MapArchitect> = match rng.range(0, 3) {
+            0 => Box::new(DrunkardsWalkArchitect {}),
+            1 => Box::new(RoomArchitect {}),
+            _ => Box::new(CellularAutomataArchitect {})
         };
         let mut mb = architect.new(rng);
         apply_prefab(&mut mb, rng);
@@ -65,14 +65,14 @@ impl MapBuilder {
 
     fn find_most_distant(&self) -> Point {
         let dijkstra_map = DijkstraMap::new(
-            SCREEN_WIDTH, 
-            SCREEN_HEIGHT, 
+            SCREEN_WIDTH,
+            SCREEN_HEIGHT,
             &[self.map.point2d_to_index(self.player_start)],
-            &self.map, 
+            &self.map,
             1024.0
         );
 
-        const UNREACHABLE : &f32 = &f32::MAX;
+        const UNREACHABLE: &f32 = &f32::MAX;
         self.map.index_to_point2d
         (
             dijkstra_map.map
@@ -154,15 +154,15 @@ impl MapBuilder {
         start: &Point,
         rng: &mut RandomNumberGenerator
     ) -> Vec<Point> {
-        let mut spawnable_tiles : Vec<Point> = self.map.tiles
+        let mut spawnable_tiles: Vec<Point> = self.map.tiles
             .iter()
             .enumerate()
             .filter(|(idx, t)| **t == TileType::Floor && DistanceAlg::Pythagoras.distance2d(*start, self.map.index_to_point2d(*idx)) > 10.0)
             .map(|(idx, _)| self.map.index_to_point2d(idx))
             .collect();
-        
+
         let mut spawns = Vec::new();
-        for _ in 0 .. NUM_MONSTERS {
+        for _ in 0..NUM_MONSTERS {
             let target_index = rng.random_slice_index(&spawnable_tiles).unwrap();
             spawns.push(spawnable_tiles[target_index]);
             spawnable_tiles.remove(target_index);

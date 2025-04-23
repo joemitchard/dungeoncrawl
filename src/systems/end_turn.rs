@@ -9,7 +9,7 @@ pub fn end_turn(
     ecs: &mut SubWorld,
     #[resource] turn_state: &mut TurnState,
     #[resource] map: &Map,
-){
+) {
     let mut player_hp = <(&Health, &Point)>::query().filter(component::<Player>());
     let mut amulet = <&Point>::query().filter(component::<AmuletOfYala>());
 

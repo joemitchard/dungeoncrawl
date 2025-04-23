@@ -29,7 +29,6 @@ pub struct MovingRandomly;
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct ChasingPlayer;
 
-
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct ProvidesHealing {
     pub amount: i32
@@ -88,9 +87,9 @@ impl FieldOfView {
     }
 
     pub fn clone_dirty(&self) -> Self {
-        Self { 
-            visible_tiles: HashSet::new(), 
-            radius: self.radius, 
+        Self {
+            visible_tiles: HashSet::new(),
+            radius: self.radius,
             is_dirty: true
         }
     }

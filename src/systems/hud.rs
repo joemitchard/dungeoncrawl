@@ -18,17 +18,17 @@ pub fn hud(ecs: &SubWorld) {
     draw_batch.target(2);
     draw_batch.print_centered(1, "Explore the Dungeon. Cursor keys to move.");
     draw_batch.bar_horizontal(
-        Point::zero(), 
-        SCREEN_WIDTH*2, 
-        player_health.current, 
-        player_health.max, 
+        Point::zero(),
+        SCREEN_WIDTH * 2,
+        player_health.current,
+        player_health.max,
         ColorPair::new(RED, BLACK)
     );
     draw_batch.print_color_centered(
         0,
         format!(
-            " Health: {} / {} ", 
-            player_health.current, 
+            " Health: {} / {} ",
+            player_health.current,
             player_health.max
         ),
         ColorPair::new(WHITE, BLACK)
@@ -39,10 +39,10 @@ pub fn hud(ecs: &SubWorld) {
         .iter(ecs)
         .find_map(|(entity, player)| Some((*entity, player.map_level)))
         .unwrap();
-    
+
     draw_batch.print_color_right(
-        Point::new(SCREEN_HEIGHT*2, 1), 
-        &format!("Level: {}", map_level), 
+        Point::new(SCREEN_HEIGHT * 2, 1),
+        &format!("Level: {}", map_level),
         ColorPair::new(YELLOW, BLACK)
     );
 
@@ -53,8 +53,8 @@ pub fn hud(ecs: &SubWorld) {
         .filter(|(_, _, carried)| carried.0 == player)
         .for_each(|(_, name, _)| {
             draw_batch.print(
-                Point::new(3, y), 
-                format!("{} : {}", y-2, &name.0)
+                Point::new(3, y),
+                format!("{} : {}", y - 2, &name.0)
             );
             y += 1;
         });

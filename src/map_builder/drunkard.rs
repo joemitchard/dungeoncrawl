@@ -12,23 +12,23 @@ impl MapArchitect for DrunkardsWalkArchitect {
         let mut mb = MapBuilder::default();
 
         mb.fill(TileType::Wall);
-        let centre = Point::new(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+        let centre = Point::new(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
         self.drunkard(&centre, rng, &mut mb.map);
 
         while mb.map.tiles.iter().filter(|t| **t == TileType::Floor).count() < DESIRED_FLOOR {
             // keep creating diggers until we have carved out enough floor space
             let next_start = Point::new(
-                rng.range(0, SCREEN_WIDTH), 
+                rng.range(0, SCREEN_WIDTH),
                 rng.range(0, SCREEN_HEIGHT)
             );
             self.drunkard(&next_start, rng, &mut mb.map);
 
             // ensure the next area is accesible
             let dijkstra_map = DijkstraMap::new(
-                SCREEN_WIDTH, 
-                SCREEN_HEIGHT, 
+                SCREEN_WIDTH,
+                SCREEN_HEIGHT,
                 &[mb.map.point2d_to_index(centre)],
-                &mb.map, 
+                &mb.map,
                 1024.0
             );
 
@@ -60,7 +60,7 @@ impl DrunkardsWalkArchitect {
         loop {
             let drunk_idx = map.point2d_to_index(drunkard_pos);
             map.tiles[drunk_idx] = TileType::Floor;
-            
+
             match rng.range(0, 4) {
                 0 => drunkard_pos.x -= 1,
                 1 => drunkard_pos.x += 1,

@@ -1,7 +1,6 @@
 use crate::prelude::*;
 
 // a system to receive want to move messages
-
 #[system(for_each)]
 #[read_component(Player)]
 #[read_component(FieldOfView)]
@@ -15,7 +14,7 @@ pub fn movement(
 ) {
     if map.can_enter_tile(want_move.destination) {
         commands.add_component(want_move.entity, want_move.destination);
-        
+
         if let Ok(entry) = ecs.entry_ref(want_move.entity) {
             if let Ok(fov) = entry.get_component::<FieldOfView>() {
                 // update field of view if found on entry
@@ -27,9 +26,7 @@ pub fn movement(
                         map.revealed_tiles[map_idx(pos.x, pos.y)] = true;
                     })
                 }
-
             }
-
         }
     }
     commands.remove(*entity);

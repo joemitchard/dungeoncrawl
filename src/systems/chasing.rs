@@ -20,10 +20,10 @@ pub fn chasing(
 
     let search_targets = vec![player_idx];
     let dijkstra_map = DijkstraMap::new(
-        SCREEN_WIDTH, 
-        SCREEN_HEIGHT, 
-        &search_targets, 
-        map, 
+        SCREEN_WIDTH,
+        SCREEN_HEIGHT,
+        &search_targets,
+        map,
         1024.0
     );
 
@@ -61,11 +61,10 @@ pub fn chasing(
 
             if !attacked {
                 commands.push(((), WantsToMove {
-                    entity: *entity, destination
+                    entity: *entity,
+                    destination
                 }));
             }
         }
-
-        
     });
 }
